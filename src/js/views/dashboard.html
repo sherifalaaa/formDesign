@@ -1,0 +1,109 @@
+<!--
+ Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+ <div class="oj-hybrid-padding">
+
+     <div id="labelContainer"
+          <div class='oj-flex-bar-start'>
+             <oj-label   class="oj-label-inline" >Product Code</oj-label>
+             <oj-input-text id="text-input" value="PN2260000000" style="padding-left:60px "></oj-input-text>
+         </div>
+
+         <div class='oj-flex-bar-start'>
+             <oj-label   class="oj-label-inline" >Product Description</oj-label>
+             <oj-input-text id="text-input" value="Semi-Trailer 2Axles Narrow 16Ton IPE550 ( Length 12500 Width 2550mm - Twist Lock/HJ )"
+                            disabled="true" style="max-width:50%;padding-left:20px " ></oj-input-text>
+         </div>
+
+         <div class='oj-flex-bar-start'>
+             <oj-label   class="oj-label-inline" >Product UOM</oj-label>
+             <oj-input-text id="text-input" value="EA" disabled="true" style="padding-left:58px "></oj-input-text>
+         </div>
+
+         <div class='oj-flex-bar-start'>
+             <oj-label   class="oj-label-inline" >Product Category</oj-label>
+             <oj-input-text id="text-input" value="Trailer" style="padding-left:35px "></oj-input-text>
+         </div>
+     </div>
+
+
+     <oj-table id="table"
+               style="padding-top:35px"  
+               aria-label="Departments Table"
+               data='[[dataprovider]]'
+               edit-mode='rowEdit'
+               columns='[{"field": "componentCategory",
+               "headerText": "Component Category",
+               "headerStyle": "min-width: 8em; max-width: 30em; width: 8em",
+               "headerClassName": "oj-helper-text-align-end",
+               "style": "min-width: 8em; max-width: 30em; width: 8em",
+               "className": "oj-read-only ",
+               "sortProperty": "DepartmentId",
+               "template": "componentCategory"},
+               {"field": "componentCode",
+               "headerText": "Component Code",
+               "headerStyle": "min-width: 8em; max-width: 30em; width: 8em",
+               "className": "oj-read-only",
+               "style": "min-width: 8em; max-width: 30em; width: 8em",
+               "template": "componentCoode"},
+               {"field":"ComponentDescription",
+               "headerText": "Component Description",
+               "headerStyle": "min-width: 12em; max-width: 30em; width: 12em",
+               "headerClassName": "oj-helper-text-align-end",
+               "style": "min-width: 12em; max-width: 30em; width: 12em",
+               "template": "componentDescription"},
+               {"field":"UOM",
+               "headerText": "UOM",
+               "headerStyle": "min-width: 7em; max-width: 30em; width: 7em",
+               "style": "min-width: 7em; max-width: 30em; width: 7em",
+               "className": "oj-read-only",
+               "template": "UOM"},
+               {"field":"Qty",
+               "headerText": "Qty",
+               "headerStyle": "min-width: 8em; max-width: 30em; width: 8em",
+               "style": "min-width: 8em; max-width: 30em; width: 8em",
+               "template": "Qty"}]'>
+
+         <template slot="componentCategory">
+             <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+         </template>
+
+         <template slot="componentCode">
+             <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+         </template>
+
+         <template slot="componentDescription">
+
+             <oj-bind-if test='[[$current.mode=="navigation"]]'>
+                 <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+             </oj-bind-if>
+
+             <oj-bind-if test='[[$current.mode=="edit"]]'>
+                 <oj-input-text id="it1" value="{{$current.row.ComponentDescription}}" data-oj-context></oj-input-text>
+             </oj-bind-if>
+         </template>
+
+         <template slot="UOM">
+             <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+         </template>
+
+         <template slot="Qty">
+
+             <oj-bind-if test='[[$current.mode=="navigation"]]'>
+                 <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+             </oj-bind-if>
+
+             <oj-bind-if test='[[$current.mode=="edit"]]'>
+                 <oj-input-text id="it1" value="{{$current.row.Qty}}" data-oj-context></oj-input-text>
+             </oj-bind-if>
+         </template>
+
+     </oj-table>
+
+     <div class='oj-flex-bar-start'style="padding-top:35px " >
+         <oj-button id='button1' >Send to BOM</oj-button>
+         <oj-button id='button1' >Send to Master Items</oj-button>
+     </div>
+
+ </div>
